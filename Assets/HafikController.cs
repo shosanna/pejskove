@@ -8,7 +8,6 @@ public class HafikController : MonoBehaviour {
 
 	private Rigidbody2D _rigidbody2D;
 	private Transform _leftRaySource;
-	private Transform _rightRaySource;
 
 	private Animator _anim;
 	private SpriteRenderer _renderer;
@@ -21,7 +20,6 @@ public class HafikController : MonoBehaviour {
 	void Start () {
 		_rigidbody2D = GetComponent<Rigidbody2D>();
 		_leftRaySource = transform.FindChild("Feet Raycast Left");
-		_rightRaySource = transform.FindChild("Feet Raycast Right");
 		_anim = GetComponent<Animator>();
 		_renderer = GetComponent<SpriteRenderer>();
 	}
@@ -46,12 +44,11 @@ public class HafikController : MonoBehaviour {
 		HandleJump();
 
 		GroundCheckRay(_leftRaySource);
-		GroundCheckRay(_rightRaySource);
 	}
 
 	private void GroundCheckRay(Transform raySource) {
 		var from = raySource.transform.position;
-		float feetRayLength = 0.03f;
+		float feetRayLength = 0.3f;
 
 		Debug.DrawLine(from, from + Vector3.down*feetRayLength);
 		var hit = Physics2D.Raycast(from, Vector2.down, feetRayLength);
